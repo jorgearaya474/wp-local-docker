@@ -1,8 +1,8 @@
-version: '3.9'
+version: '3'
 
 services:
   db:
-    image: mysql:latest
+    image: mysql:5.7
     volumes:
       - db_data:/var/lib/mysql
     restart: always
@@ -12,7 +12,7 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
     ports:
-      - "3306:3306"
+      - '3306:3306'
     networks:
       - localwp
 
@@ -30,7 +30,7 @@ services:
       - ./wordpress/themes:/var/www/html/wp-content/themes
       - ./wordpress/plugins:/var/www/html/wp-content/plugins
     ports:
-      - "8000:80"
+      - '8000:80'
     restart: on-failure
     networks:
       - localwp
@@ -41,3 +41,4 @@ volumes:
 
 networks:
   localwp:
+    driver: bridge
